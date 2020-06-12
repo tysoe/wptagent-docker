@@ -18,7 +18,7 @@ ARG MAKE_ARCH
 
 # Copy run installer for Raspbian Buster
 COPY container-install.sh ./
-RUN ARG_MAKE_ARCH=${MAKE_ARCH} ARG_AGENT_MODE=${AGENT_MODE} DISABLE_IPV6=${DISABLE_IPV6} WPT_SERVER=${WPT_SERVER} ./raspbian.sh
+RUN ARG_MAKE_ARCH=${MAKE_ARCH} ARG_AGENT_MODE=${AGENT_MODE} DISABLE_IPV6=${DISABLE_IPV6} WPT_SERVER=${WPT_SERVER} ./container-install.sh
 
 # Move to wptagent context
 USER wptagent
