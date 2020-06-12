@@ -33,7 +33,8 @@ libtiff5-dev libjpeg-dev zlib1g-dev libfreetype6-dev liblcms2-dev libwebp-dev tc
 python-dev libavutil-dev libmp3lame-dev libx264-dev yasm autoconf automake build-essential libass-dev libfreetype6-dev libtheora-dev \
 libtool libvorbis-dev pkg-config texi2html libtext-unidecode-perl python-numpy python-scipy \
 imagemagick ffmpeg adb traceroute software-properties-common psmisc libnss3-tools iproute2 net-tools ethtool nodejs \
-cmake git-core libsdl2-dev libva-dev libvdpau-dev libxcb1-dev libxcb-shm0-dev libxcb-xfixes0-dev texinfo wget
+cmake git-core libsdl2-dev libva-dev libvdpau-dev libxcb1-dev libxcb-shm0-dev libxcb-xfixes0-dev texinfo wget \
+libc6-armel-cross libc6-dev-armel-cross binutils-arm-linux-gnueabi libncurses5-dev
 do
     sleep 1
 done
