@@ -183,6 +183,7 @@ sed -i 's/exit 0/ethtool --offload eth0 rx off tx off\nexit 0/g' /etc/network/in
 
 # configure adb
 gpasswd -a $USER plugdev
+mkdir -p /etc/udev/rules.d/
 if [ "${AGENT_MODE,,}" == 'android' ]; then
   echo "SUBSYSTEM==\"usb\", ATTR{idVendor}==\"0502\", MODE=\"0666\", GROUP=\"plugdev\", OWNER=\"$USER\"" | tee /etc/udev/rules.d/51-android.rules
   echo "SUBSYSTEM==\"usb\", ATTR{idVendor}==\"0b05\", MODE=\"0666\", GROUP=\"plugdev\", OWNER=\"$USER\"" | tee -a /etc/udev/rules.d/51-android.rules

@@ -1,4 +1,4 @@
-FROM debian:stretch
+FROM debian:buster
 
 # Install dependencies
 RUN apt update && \
@@ -22,3 +22,7 @@ RUN ARG_AGENT_MODE=${AGENT_MODE} DISABLE_IPV6=${DISABLE_IPV6} WPT_SERVER=${WPT_S
 # Move to wptagent context
 USER wptagent
 WORKDIR /opt/wptagent
+
+# Set CMD
+COPY entrypoint.sh ./
+ENTRYPOINT entrypoint.sh
