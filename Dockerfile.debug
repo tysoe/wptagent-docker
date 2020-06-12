@@ -1,0 +1,10 @@
+FROM debian:buster
+
+# Install dependencies
+RUN apt update && \
+    apt install -y curl vim && \
+    apt clean && \
+    apt clean cache  # Is this needed?
+
+COPY raspbian.sh ./
+COPY entrypoint.sh ./

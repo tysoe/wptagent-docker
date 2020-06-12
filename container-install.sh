@@ -20,13 +20,6 @@ until apt -y update
 do
     sleep 1
 done
-# Known-good kernel 4.14.62
-# TODO: remove this when newer kernels stop panic'ing for netem
-#until rpi-update 911147a3276beee09afc4237e1b7b964e61fb88a
-#do
-#    sleep 1
-#done
-apt-mark hold raspberrypi-bootloader raspberrypi-kernel
 
 # Install OS packages
 until DEBIAN_FRONTEND=noninteractive apt -yq -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" dist-upgrade
@@ -79,7 +72,7 @@ cd ~
 cd ~
 git clone --depth 1 https://github.com/FFmpeg/FFmpeg.git ffmpeg
 cd ffmpeg
-./configure --arch=armel --target-os=linux --enable-gpl --enable-libx264 --enable-nonfree
+./configure --arch=$ARG_MAKE_ARCH --target-os=linux --enable-gpl --enable-libx264 --enable-nonfree
 make -j4
 make install
 cd ~
@@ -138,24 +131,6 @@ if [ "${AGENT_MODE,,}" == 'ios' ]; then
   sh -c 'echo /usr/local/lib > /etc/ld.so.conf.d/libimobiledevice-libs.conf'
   ldconfig
 fi
-
-# System config
-echo '# Limits increased for wptagent' | tee -a /etc/security/limits.conf
-echo '* soft nofile 250000' | tee -a /etc/security/limits.conf
-echo '* hard nofile 300000' | tee -a /etc/security/limits.conf
-echo '# wptagent end' | tee -a /etc/security/limits.conf
-echo '# Settings updated for wptagent' | tee -a /etc/sysctl.conf
-echo 'net.ipv4.tcp_syn_retries = 4' | tee -a /etc/sysctl.conf
-
-# Boot options
-echo 'dtoverlay=pi3-disable-wifi' | tee -a /boot/config.txt
-echo 'dtparam=sd_overclock=100' | tee -a /boot/config.txt
-echo 'dtparam=watchdog=on' | tee -a /boot/config.txt
-
-# Swap file
-echo "CONF_SWAPSIZE=1024" | tee /etc/dphys-swapfile
-dphys-swapfile setup
-dphys-swapfile swapon
 
 # disable IPv6 if requested
 if [ "${DISABLE_IPV6,,}" == 'y' ]; then

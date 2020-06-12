@@ -8,5 +8,6 @@ Run the Webpage Test Agent from inside a Docker image, using runtime configurati
 Use a local Docker daemon to construct the image:
 
 ```
-docker build -t jack/testing --build-arg AGENT_MODE=Android --build-arg DISABLE_IPV6=y --build-arg WPT_SERVER=localhost:8080 --build-arg WPT_LOCATION=london .
+# Change MAKE_ARCH=x86_64 to MAKE_ARCH=armel for building directly on Pi ARM CPU (haven't figured out cross-compiler yet!)
+docker build -t jack/testing --build-arg MAKE_ARCH=x86_64 --build-arg AGENT_MODE=Android --build-arg DISABLE_IPV6=y --build-arg WPT_SERVER=localhost:8080 --build-arg WPT_LOCATION=london .
 ```
